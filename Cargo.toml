@@ -79,4 +79,4 @@ cuda = [
     "dep:cudarc",
 ]
 cudnn = ["candle/cudnn"]
-metal = ["candle/metal", "candle-nn/metal", "dep:metal"]
+metal = ["candle/metal", "candle-nn/metal", "candle-metal-kernels", "dep:metal"]

@@ -15,6 +15,14 @@ Take a prompt, generate an image using Stable Diffusion, feed the image into BLI
 
 ![an image of a run](support/img/run-image.png)
 
+## Try out in the cloud
+
+You can try it out sd-blip attraction on huggingface at:
+
+https://huggingface.co/spaces/ciyer/sd-blip-attraction
+
+_Be warned, though, that you will need to have some patience to see the output._
+
 
 ## Run on your on hardware
 
@@ -41,17 +49,21 @@ dist/sd-blip-attraction
 
 ## Hardware Acceleration
 
+The app runs much faster with hardware acceleration, but requires a slightly different command for the build.
 
-I am hoping to allow running with hardware acceleration using Metal on Apple hardware with something like:
-
-```
-dx serve --server-feature metal
-```
-
-or:
+To build using Metal on Apple hardware, use the following sequence of commands:
 
 ```
 dx build --release --platform fullstack --server-feature metal
+cargo build --release --features server,metal
 ```
 
-Modifying `Cargo.toml` as described in the comments of the file do allow use of metal, but I have not been able to get it to work by passing the feature flags as command-line arguments.
+And then run with:
+
+```
+target/release/sd-blip-attraction
+```
+
+Connect a web browser to http://localhost:8080, where you should see the app. You may see some complaints in the logs, but they can be ignored.
+
+It should be possible to replace `metal` with `cuda` in the command above, but I have not tested this myself, since I do not have the right hardware.
